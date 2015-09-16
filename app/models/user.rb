@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
-  validates :username, :session_token, presence: true
-  validates :password_digest, presence: { message: "Password can't be blank" }
+  validates :username, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 5, allow_nil: true }
 
   def self.find_by_credentials(username, password)
