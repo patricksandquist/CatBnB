@@ -16,10 +16,10 @@ class User < ActiveRecord::Base
   validates :username, :password_digest, :session_token, presence: true
 
   def self.find_by_credentials(username, password)
-    user = users.find_by_username(username)
-    return if user.nil?
+    user = find_by_username(username)
+    return nil if user.nil?
 
-    user.is_password?(password)
+    user.is_password?(password) ? user : nil
   end
 
   def reset_session_token!
