@@ -8,9 +8,22 @@
 </head>
 <body>
 
-<h1>
-  <% if logged_in? -%>Welcome, <%= current_user.name %><% end -%>
-</h1>
+<% if logged_in? %>
+  <% if flash[:welcome] %>
+    <h1><%= flash[:welcome] %></h1>
+  <% end %>
+  <br>
+  <br>
+  <h3>
+    <%= button_to "Logout", session_url, method: :delete %>
+  </h3>
+<% else %>
+  <h1>Please log in or create an account!</h1>
+  <h2>
+    <%= button_to "Login form", new_session_url, method: :get %>
+    <%= button_to "Signup form", new_user_url, method: :get %>
+  </h2>
+<% end %>
 
 <%= yield %>
 
