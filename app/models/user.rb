@@ -15,6 +15,13 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  has_many(
+    :cats,
+    class_name: "Cat",
+    primary_key: :id,
+    foreign_key: :user_id
+  )
+
   validates :username, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 5, allow_nil: true }
 
