@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+
   helper_method :current_user, :logged_in?
 
   def current_user
@@ -23,5 +25,13 @@ class ApplicationController < ActionController::Base
       @user = User.new
       render :new
     end
+  end
+
+  def redirect_if_logged_in
+    redirect_to cats_url if logged_in?
+  end
+
+  def redirect_if_not_logged_in
+    redirect_to new_user_url unless logged_in?
   end
 end

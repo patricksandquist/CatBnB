@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
+  before_action :redirect_if_logged_in, only: [:new, :create]
+
   def new
-    # acts as a login page
     @user = User.new
     render :new
   end
